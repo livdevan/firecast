@@ -1,1 +1,5 @@
-{}
+{
+  "projects": {
+    "default": "firecast-1d6fe"
+  }
+}
