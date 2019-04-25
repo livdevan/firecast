@@ -4,21 +4,21 @@ import * as admin from "firebase-admin";
 // // https://firebase.google.com/docs/functions/typescript
 admin.initializeApp();
 
-// export const onBostonWeatherUpdate = functions.firestore
-//   .document("cities-weather/VrWPTAlzgc5hHLEI0BQQ")
-//   .onUpdate(change => {
-//     const after = change.after.data();
-//     const payload = {
-//       data: {
-//         temp: String(after.temp),
-//         conditions: after.conditions
-//       }
-//     };
-//     return admin
-//       .messaging()
-//       .sendToTopic("weather_boston-ma-us", payload)
-//       .catch(error => console.error("FCM Failed", error));
-//   });
+export const onBostonWeatherUpdate = functions.firestore
+  .document("cities-weather/boston - ma - us")
+  .onUpdate(change => {
+    const after = change.after.data();
+    const payload = {
+      data: {
+        temp: String(after!.temp),
+        conditions: after!.conditions
+      }
+    };
+    return admin
+      .messaging()
+      .sendToTopic("weather_boston-ma-us", payload)
+      .catch(error => console.error("FCM Failed", error));
+  });
 
 export const getBostonWeather = functions.https.onRequest(
   (request, response) => {
